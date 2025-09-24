@@ -1,2 +1,2 @@
 # kirby-snake
-Juego de snake con tematica de kirby en python
+Kirby-themed snake game in Python.
