@@ -1,5 +1,7 @@
 import pygame
-from button import button
+import states
+from menu import Menu
+from game import Game
 
 pygame.init()
 
@@ -10,30 +12,45 @@ ventana = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("snake")
 clock = pygame.time.Clock()
 
-#colores
-celeste = (135, 206, 235)
+#configuración de la pantalla
+menu = Menu(ancho, alto)
+game = Game(ancho, alto)
 
-#creación de botones
-start_button = button(pygame.image.load("Assets/button/start_button.png").convert_alpha(),pos = (400, 300), scale = 0.1)
-close_button = button(pygame.image.load("Assets/button/close_button.png").convert_alpha(),pos = (400, 400), scale = 0.1) 
+estado = states.MENU
+running = True
+
 
 #bucle principal
-while True: 
+while running: 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
 
-        if start_button.event_mouse(event):
-            print("botón presionado")
-        if close_button.event_mouse(event):
-            pygame.quit()
+        if estado == states.MENU:
+            nuevo_estado = menu.handle_event(event)
 
+            if nuevo_estado is None:
+                running = False
+            
+            else: 
+                estado = nuevo_estado
+        
+        elif estado == states.GAME:
+            estado = game.handle_event(event)
+
+        
     #lógica del juego
+    if estado == states.GAME:
+        game.update()
+
 
     #dibujar en pantalla
-    ventana.fill(celeste)
-    start_button.draw(ventana)
-    close_button.draw(ventana)
+    if estado == states.MENU:
+        menu.draw(ventana)
+    
+    if estado == states.GAME:
+        game.draw(ventana)
+
 
     pygame.display.update()
     clock.tick(60)

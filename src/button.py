@@ -1,7 +1,7 @@
 import pygame
 
 #constructor de botones 
-class button:
+class Button:
     def __init__(self, image, pos, scale = 1):
 
         self.original_image = pygame.transform.scale(image, (int(image.get_width() * scale), int(image.get_height() * scale)))
