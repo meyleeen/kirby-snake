@@ -2,25 +2,25 @@ import pygame
 import states
 from menu import Menu
 from game import Game
+import config
+from gameover import GameOver
 
 pygame.init()
 
-#configuración de la ventana
-ancho = 800
-alto = 600
-ventana = pygame.display.set_mode((ancho, alto))
-pygame.display.set_caption("snake")
+#Configuración de la ventana.
+ventana = pygame.display.set_mode((config.ANCHO, config.ALTO))
+pygame.display.set_caption("Kirby Snake")
 clock = pygame.time.Clock()
 
-#configuración de la pantalla
-menu = Menu(ancho, alto)
-game = Game(ancho, alto)
+#Configuración de la pantalla.
+menu = Menu(config.ANCHO, config.ALTO)
+game = Game(config.ANCHO, config.ALTO)
+game_over = GameOver(config.ANCHO, config.ALTO)
 
 estado = states.MENU
 running = True
 
-
-#bucle principal
+#Bucle principal.
 while running: 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -38,19 +38,30 @@ while running:
         elif estado == states.GAME:
             estado = game.handle_event(event)
 
+        elif estado == states.GAME_OVER:
+            estado = game_over.handle_event(event)
+            if estado == states.GAME:
+                #Reiniciar la partida si se elige reiniciar.
+                game = Game(config.ANCHO, config.ALTO)
+
+
         
-    #lógica del juego
+    #Lógica del juego.
     if estado == states.GAME:
         game.update()
 
-
-    #dibujar en pantalla
+    #Dibujar en pantalla.
     if estado == states.MENU:
         menu.draw(ventana)
     
     if estado == states.GAME:
         game.draw(ventana)
 
+    if estado == states.GAME_OVER:
+        game_over.draw(ventana, game.score)
+
 
     pygame.display.update()
-    clock.tick(6)
+    clock.tick(config.VELOCIDAD)
+
+pygame.quit()

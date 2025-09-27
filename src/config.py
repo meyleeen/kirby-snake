@@ -8,8 +8,8 @@ ROSA = (255, 192, 203)
 NEGRO = (0, 0, 0)
 
 #snake
-TAMAÑO_CELDAS = 25
-VELOCIDAD = 1
+TAMAÑO_CELDAS = 30
+VELOCIDAD = 5
 
 #rutas sprites
 KIRBY = "Assets/sprites/kirby.png"

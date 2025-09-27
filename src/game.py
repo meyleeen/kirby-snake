@@ -6,7 +6,7 @@ from food import Food
 import collisions
 
 class Game:
-    def __init__(self, alto, ancho):
+    def __init__(self, ancho, alto):
         #crear kirby y estrella
         self.snake = Snake()
         self.food = Food()
