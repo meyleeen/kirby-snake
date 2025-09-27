@@ -1,14 +1,27 @@
+"""
+food.py
+-------
+Clase Food que representa la "comida" (estrella) en el juego.
+
+-Cargar el sprite de la estrella y escalarlo al tamaño de celda.
+-Mantener posicion en coordenadas de grilla (x,y) de 0..max_celda-1.
+-Generar una nueva posición aleatoria con randomize().
+-Dibujar la estrella en pantalla con la conversión de
+coordenadas de grilla -> pixeles (usando offset_x/offset_y).
+"""
+
+
 import pygame
 import random
 import config
 
 class Food:
     def __init__(self):
-        #sprite de la estrella
+        #Sprite de la estrella.
         self.image = pygame.image.load(config.ESTRELLA).convert_alpha()
         self.image = pygame.transform.scale(self.image, (config.TAMAÑO_CELDAS, config.TAMAÑO_CELDAS))
 
-        #estrella incial
+        #Estrella incial.
         self.posicion = (0, 0)
         self.randomize()
     

@@ -1,3 +1,13 @@
+"""
+Clase Game que encapsula el estado y lógica de una partida:
+Inicializa Snake y Food.
+Mantiene score (puntos).
+Calcula offsets para centrar la ZONA_DE_JUEGO en la ventana.
+handle_event: procesa teclas (direcciones, ESC -> menú).
+update: lógica por frame (comer, mover, comprobar colisiones).
+draw: dibuja fondo, borde del área jugable, comida, serpiente y marcador.
+"""
+
 import pygame 
 import states
 import config
@@ -7,12 +17,12 @@ import collisions
 
 class Game:
     def __init__(self, ancho, alto):
-        #crear kirby y estrella
+        #Crear kirby y estrella.
         self.snake = Snake()
         self.food = Food()
-        self.score = 0 #puntos del jugador
+        self.score = 0 #Puntos del jugador.
 
-        #margenes para calcular la zona jugable
+        #Margenes para calcular la zona jugable.
         self.offset_x = (ancho - config.ZONA_DE_JUEGO)// 2
         self.offset_y = (alto - config.ZONA_DE_JUEGO)// 2
 
@@ -38,19 +48,19 @@ class Game:
         return states.GAME
     
     def update(self):
-        #actualiza la lógica del juego
+        #Actualiza la lógica del juego.
         grow = False
 
-        #si kirby come una estrella, crece y suma puntos, se añade nueva estrella en el mapa
+        #Si kirby come una estrella, crece y suma puntos, se añade nueva estrella en el mapa.
         if collisions.check_food_collision(self.snake, self.food):
             grow = True 
             self.score += 1
             self.food.randomize()
         
-        #mover kirby 
+        #Mover kirby. 
         self.snake.move(grow)
 
-        #comprobar colisiones
+        #Comprobar colisiones.
         if collisions.check_self_collision(self.snake) or collisions.check_wall_collision(self.snake):
             return states.GAME_OVER
         
@@ -59,14 +69,14 @@ class Game:
     def draw(self, surface):
         surface.fill(config.ROSA)
 
-        #dibujar el borde del área jugable
+        #Dibujar el borde del área jugable.
         pygame.draw.rect(surface, config.NEGRO, (self.offset_x, self.offset_y, config.ZONA_DE_JUEGO, config.ZONA_DE_JUEGO), 3)
 
-        #dibujar comida kirby
+        #Dibujar comida kirby.
         self.food.draw(surface, self.offset_x, self.offset_y)
         self.snake.draw(surface, self.offset_x, self.offset_y)
 
-        #dibujar el marcador
+        #Dibujar el marcador.
         font = pygame.font.SysFont(None, 40)
-        text = font.render(f"Puntos: {self.score}", True, config.NEGRO)
+        text = font.render(f"Score: {self.score}", True, config.NEGRO)
         surface.blit(text,(10, 10))

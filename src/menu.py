@@ -1,15 +1,21 @@
+"""
+Pantalla de menú principal:
+Muestra botones Start y Close (salir).
+Al pulsar Start devuelve states.GAME (el main debe crear la nueva Game).
+Al pulsar Close devuelve None para indicar que se debe cerrar la aplicación.
+"""
+
+
 import pygame
 from button import Button
 import states
+import config
 
 
 class Menu:
     def __init__(self, ancho, alto):
 
-        #colores
-        self.celeste = (135, 206, 235)
-
-        #creación de botones
+        #Creación de botones.
         self.start_button = Button(pygame.image.load("Assets/button/start_button.png").convert_alpha(),pos = (400, 300), scale = 0.1)
         self.close_button = Button(pygame.image.load("Assets/button/close_button.png").convert_alpha(),pos = (400, 400), scale = 0.1) 
 
@@ -26,7 +32,7 @@ class Menu:
     
     def draw(self, surface):
 
-        surface.fill(self.celeste)
+        surface.fill(config.CELESTE)
         self.start_button.draw(surface)
         self.close_button.draw(surface)
 

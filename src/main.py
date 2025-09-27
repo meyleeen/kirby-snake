@@ -1,3 +1,9 @@
+"""
+Aquí se concentra el bucle principal del juego, se inicializa pygame y todos los componentes de la aplicación.
+Maneja el ciclo de eventos y la lógica de cambio de estados.
+Dibuja la pantalla correspondiente a cada estado y actualiza el display.
+"""
+
 import pygame
 import states
 from menu import Menu
@@ -34,6 +40,8 @@ while running:
             
             else: 
                 estado = nuevo_estado
+                if estado == states.GAME:
+                    game = Game(config.ANCHO, config.ALTO) #Reinicia al empezar una partida nueva.
         
         elif estado == states.GAME:
             estado = game.handle_event(event)
@@ -41,14 +49,14 @@ while running:
         elif estado == states.GAME_OVER:
             estado = game_over.handle_event(event)
             if estado == states.GAME:
-                #Reiniciar la partida si se elige reiniciar.
+                #Reinicia la partida si se elige el botón "reiniciar".
                 game = Game(config.ANCHO, config.ALTO)
 
 
         
     #Lógica del juego.
     if estado == states.GAME:
-        game.update()
+        estado = game.update()
 
     #Dibujar en pantalla.
     if estado == states.MENU:

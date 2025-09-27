@@ -1,3 +1,9 @@
+"""Funciones puras para comprobar colisiones lógicas en el juego (no dibujo).
+check_self_collision(snake): True si la cabeza coincide con cualquier segmento del cuerpo.
+check_wall_collision(snake): True si la cabeza sale del área jugable (en coordenadas de celdas).
+check_food_collision(snake, food): True si la cabeza está en la misma celda que la comida.
+"""
+
 import config
 
 def check_self_collision(snake):

@@ -1,16 +1,21 @@
-#dimensiones 
+"""
+Constantes globales del juego.
+"""
+
+#Dimensiones. 
 ANCHO = 800
 ALTO = 600
 ZONA_DE_JUEGO = 500
 
-#colores 
+#Colores. 
 ROSA = (255, 192, 203)
 NEGRO = (0, 0, 0)
+CELESTE = (135, 206, 235)
 
-#snake
+#Snake.
 TAMAÑO_CELDAS = 30
 VELOCIDAD = 5
 
-#rutas sprites
+#Rutas sprites.
 KIRBY = "Assets/sprites/kirby.png"
 ESTRELLA = "Assets/sprites/estrella.png"

@@ -1,6 +1,15 @@
+"""
+Define la clase Button que encapsula:
+  - La imagen del botón (normal y "presionado")
+  - La detección de hover (si el mouse está encima)
+  - La animación de press (escala)
+  - El manejo de eventos del mouse (MOUSEBUTTONDOWN / MOUSEBUTTONUP)
+"""
+
+
 import pygame
 
-#constructor de botones 
+#Constructor de botones.
 class Button:
     def __init__(self, image, pos, scale = 1):
 
@@ -15,18 +24,18 @@ class Button:
 
         self.pressed = False
 
-    #dibujar botón
+    #Dibujar botón.
     def draw(self, surface):
         surface.blit(self.image, self.rect) 
     
     def is_hovered(self):
         return self.rect.collidepoint(pygame.mouse.get_pos()) #devuelve True si el mouse está sobre el botón
     
-    #manejo de los eventos del mouse 
+    #Manejo de los eventos del mouse.
     def event_mouse(self, event):
 
 
-        #cuando se presiona el botón del mouse
+        #Cuando se presiona el botón del mouse.
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.is_hovered():
                 self.pressed = True
@@ -36,12 +45,12 @@ class Button:
                 self.rect = self.image.get_rect(center = self.rect.center)
 
 
-        #cuando se suelta el botón del mouse
+        #Cuando se suelta el botón del mouse.
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             if self.pressed:
                 self.pressed = False
 
-                #animación botón
+                #Animación botón.
                 self.image = self.original_image 
                 self.rect = self.image.get_rect(center = self.rect.center)
 

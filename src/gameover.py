@@ -1,3 +1,14 @@
+"""
+Pantalla de Game Over:
+Muestra un título "GAME OVER".
+Muestra la puntuación final.
+Contiene botones "Retry" y "Menu" (usando la clase Button).
+handle_event retorna states según la acción del usuario:
+si se pulsa Retry -> states.GAME (reinicia la partida en main)
+si se pulsa Menu -> states.MENU
+"""
+
+
 import pygame
 import states
 from button import Button
@@ -5,7 +16,7 @@ import config
 
 class GameOver:
     def __init__(self, ancho, alto):
-        # Cargar sprites de botones
+        # Cargar sprites de botones.
         retry_img = pygame.image.load("Assets/button/retry_button.png").convert_alpha()
         menu_img = pygame.image.load("Assets/button/menu_button.png").convert_alpha()
 
@@ -32,7 +43,7 @@ class GameOver:
 
         # Mostrar puntuación final.
         font_small = pygame.font.SysFont(None, 50)
-        score_text = font_small.render(f"Puntos: {score}", True, config.NEGRO)
+        score_text = font_small.render(f"Score: {score}", True, config.NEGRO)
         surface.blit(score_text, (surface.get_width() // 2 - score_text.get_width() // 2, 250))
 
         # Dibujar botones.
