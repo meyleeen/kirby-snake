@@ -53,4 +53,4 @@ while running:
 
 
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(10)

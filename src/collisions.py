@@ -1,0 +1,14 @@
+def check_self_collision(snake):
+    #Devuelve True si kirby toca cualquier parte del cuerpo.
+    head = snake.get_kirby()
+    return head in snake.cuerpo[1:]
+
+def check_wall_collision(snake):
+    #Devuelve True si la cabeza está fuera de los límites de la zona jugable.
+    x, y = snake.get_kirby()
+    max_celda = 500 // 25  # número de celdas en la zona jugable
+    return x < 0 or y < 0 or x >= max_celda or y >= max_celda
+
+def check_food_collision(snake, food):
+    #Devuelve True si la cabeza está en la misma posición que la comida.
+    return snake.get_kirby() == food.posicion
