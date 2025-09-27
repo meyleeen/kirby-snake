@@ -12,7 +12,7 @@ class Snake:
 
 
         #posición inicial
-        self.cuerpo = [(1, 1)] #lista de coordenadas de kirby y las estrellas
+        self.cuerpo = [(5,5)] #lista de coordenadas de kirby y las estrellas
         self.direccion = (1, 0)
 
     def get_kirby(self):
@@ -22,11 +22,11 @@ class Snake:
         x, y = self.get_kirby() #posición en la que está kirby en x / y 
         dx, dy = self.direccion #direccion en la que se mueve kirby en x / y 
 
-        nueva_posicion = (x + dx, x + dy) #nueva posición de kirby
+        nueva_posicion = (x + dx, y + dy) #nueva posición de kirby
         self.cuerpo.insert(0, nueva_posicion)
         
         if not grow:
-            self.cuerpo.pop
+            self.cuerpo.pop()
     
     def cambiar_direccion(self, nueva_direccion):
         if (nueva_direccion[0] * -1, nueva_direccion[1] * -1) != self.direccion:
